@@ -5,7 +5,7 @@ API keys are loaded from the .env file – no client input required.
 """
 
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
@@ -14,7 +14,7 @@ from src.langgraph_agentic_ai.graph.graph_builder import GraphBuilder
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 
 # Load .env from the project root (one level up from Agentic-Chatbot/)
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
+#load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 app = Flask(__name__, static_folder="static", static_url_path="")
 CORS(app)
