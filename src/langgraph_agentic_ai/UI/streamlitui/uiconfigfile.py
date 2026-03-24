@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from configparser import ConfigParser
 
 class Config:
@@ -15,4 +16,23 @@ class Config:
         return self.config["DEFAULT"].get("GROQ_MODEL_OPTIONS").split(", ")
 
     def get_page_title(self):
+=======
+from configparser import ConfigParser
+
+class Config:
+    def __init__(self,config_file="./src/langgraph_agentic_ai/UI/streamlitui/uiconfigfile.ini"):
+        self.config=ConfigParser()
+        self.config.read(config_file)
+
+    def get_llm_options(self):
+        return self.config["DEFAULT"].get("LLM_OPTIONS").split(", ")
+
+    def get_usecase_options(self):
+        return self.config["DEFAULT"].get("USECASE_OPTIONS").split(", ")
+
+    def get_groq_model_options(self):
+        return self.config["DEFAULT"].get("GROQ_MODEL_OPTIONS").split(", ")
+
+    def get_page_title(self):
+>>>>>>> 1c6fc7870aa3a19e2c2fc4efe88feabd82aa7f78
         return self.config["DEFAULT"].get("PAGE_TITLE")
