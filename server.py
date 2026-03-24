@@ -5,11 +5,7 @@ API keys are loaded from the .env file – no client input required.
 """
 
 import os
-<<<<<<< HEAD
 from dotenv import load_dotenv
-=======
-#from dotenv import load_dotenv
->>>>>>> 1c6fc7870aa3a19e2c2fc4efe88feabd82aa7f78
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
@@ -18,11 +14,7 @@ from src.langgraph_agentic_ai.graph.graph_builder import GraphBuilder
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 
 # Load .env from the project root (one level up from Agentic-Chatbot/)
-<<<<<<< HEAD
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
-=======
-#load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
->>>>>>> 1c6fc7870aa3a19e2c2fc4efe88feabd82aa7f78
 
 app = Flask(__name__, static_folder="static", static_url_path="")
 CORS(app)
@@ -134,29 +126,12 @@ def chat():
         elif selected_usecase == "AI News":
             frequency = user_message  # e.g. "daily" / "weekly" / "monthly"
             result = graph.invoke({"messages": frequency})
-<<<<<<< HEAD
             md_content = result.get("markdown", "").strip()
             if not md_content:
                 return jsonify({"error": "Failed to generate AI news summary."}), 500
             return jsonify(
                 {"usecase": selected_usecase, "markdown": md_content, "frequency": frequency}
             )
-=======
-            ai_news_path = f"./AINews/{frequency.lower()}_summary.md"
-            try:
-                with open(ai_news_path, "r") as f:
-                    md_content = f.read()
-                return jsonify(
-                    {"usecase": selected_usecase, "markdown": md_content, "frequency": frequency}
-                )
-            except FileNotFoundError:
-                return (
-                    jsonify(
-                        {"error": f"News file not found: {ai_news_path}. Generation may have failed."}
-                    ),
-                    404,
-                )
->>>>>>> 1c6fc7870aa3a19e2c2fc4efe88feabd82aa7f78
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
