@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LangGraph AgenticAI – a professional multi-use-case AI assistant powered by LangGraph, Groq, and Tavily." />
+  <title>LangGraph AgenticAI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Marked.js (markdown renderer) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <div>
+          <span class="logo-title">AgenticAI</span>
+          <span class="logo-sub">LangGraph Studio</span>
+        </div>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" title="Collapse sidebar">&#8249;</button>
+    </div>
+
+    <!-- Config panel -->
+    <div class="sidebar-body">
+
+      <div class="section-label">Configuration</div>
+
+      <!-- LLM Provider -->
+      <div class="form-group">
+        <label for="llmSelect">LLM Provider</label>
+        <div class="select-wrapper">
+          <select id="llmSelect"></select>
+          <span class="select-arrow">▾</span>
+        </div>
+      </div>
+
+      <!-- Model -->
+      <div class="form-group" id="modelGroup">
+        <label for="modelSelect">Model</label>
+        <div class="select-wrapper">
+          <select id="modelSelect"></select>
+          <span class="select-arrow">▾</span>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-top:1.5rem">Use Case</div>
+
+      <!-- Use Case -->
+      <div class="form-group">
+        <label for="usecaseSelect">Select Use Case</label>
+        <div class="select-wrapper">
+          <select id="usecaseSelect"></select>
+          <span class="select-arrow">▾</span>
+        </div>
+      </div>
+
+      <!-- News timeframe (conditional) -->
+      <div class="form-group hidden" id="timeframeGroup">
+        <label for="timeframeSelect">News Timeframe</label>
+        <div class="select-wrapper">
+          <select id="timeframeSelect">
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+          </select>
+          <span class="select-arrow">▾</span>
+        </div>
+      </div>
+
+      <!-- Fetch news button (conditional) -->
+      <button class="btn-primary hidden" id="fetchNewsBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Fetch Latest AI News
+      </button>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="sidebar-footer">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusLabel">Ready</span>
+    </div>
+  </aside>
+
+  <!-- ── Main content ─────────────────────────────────────────────────────── -->
+  <main class="main" id="main">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <button class="topbar-menu" id="topbarMenu" title="Open sidebar">&#9776;</button>
+      <div class="topbar-title" id="topbarTitle">Basic Chatbot</div>
+      <div class="topbar-actions">
+        <button class="btn-icon" id="clearChatBtn" title="Clear chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Chat window -->
+    <div class="chat-window" id="chatWindow">
+
+      <!-- Welcome screen -->
+      <div class="welcome" id="welcomeScreen">
+        <div class="welcome-icon">⬡</div>
+        <h1 class="welcome-title">LangGraph AgenticAI</h1>
+        <p class="welcome-sub">A powerful multi-use-case AI assistant. Configure your settings in the sidebar to get started.</p>
+        <div class="welcome-cards">
+          <div class="welcome-card" data-msg="Tell me about recent advances in AI">
+            <span>💡</span>
+            <span>Tell me about recent AI advances</span>
+          </div>
+          <div class="welcome-card" data-msg="What is LangGraph and how does it work?">
+            <span>🔗</span>
+            <span>What is LangGraph?</span>
+          </div>
+          <div class="welcome-card" data-msg="Search the web for the latest AI news today">
+            <span>🌐</span>
+            <span>Search the web for AI news</span>
+          </div>
+          <div class="welcome-card" data-msg="Summarize the state of large language models in 2024">
+            <span>🤖</span>
+            <span>Summarize state of LLMs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages container -->
+      <div class="messages" id="messages"></div>
+
+    </div>
+
+    <!-- Input area -->
+    <div class="input-area" id="inputArea">
+      <div class="input-wrapper">
+        <textarea
+          id="userInput"
+          placeholder="Type a message…"
+          rows="1"
+          autocomplete="off"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" title="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+      <div class="input-meta">
+        <span id="usecasePill"></span>
+        <span class="model-badge" id="modelBadge"></span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Notification toast ─────────────────────────────────────────────── -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
