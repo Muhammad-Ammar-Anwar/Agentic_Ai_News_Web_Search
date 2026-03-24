@@ -11,7 +11,6 @@ const sidebarToggle   = document.getElementById("sidebarToggle");
 const topbarMenu      = document.getElementById("topbarMenu");
 const topbarTitle     = document.getElementById("topbarTitle");
 
-const llmSelect       = document.getElementById("llmSelect");
 const modelSelect     = document.getElementById("modelSelect");
 const usecaseSelect   = document.getElementById("usecaseSelect");
 const timeframeSelect = document.getElementById("timeframeSelect");
@@ -46,7 +45,6 @@ async function loadConfig() {
     const res  = await fetch(`${API_BASE}/api/config`);
     const data = await res.json();
 
-    populateSelect(llmSelect,      data.llm_options);
     populateSelect(modelSelect,    data.groq_model_options);
     populateSelect(usecaseSelect,  data.usecase_options);
 
