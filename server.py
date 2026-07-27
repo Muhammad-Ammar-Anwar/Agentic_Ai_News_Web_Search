@@ -21,9 +21,10 @@ CORS(app)
 
 # ── Config ────────────────────────────────────────────────────────────────────
 LLM_OPTIONS = ["Groq"]
-USECASE_OPTIONS = ["Basic Chatbot", "Chatbot with WebSearch", "AI News"]
+USECASE_OPTIONS = ["Chatbot", "Chatbot with WebSearch", "AI News"]
 GROQ_MODEL_OPTIONS = [
     "llama-3.3-70b-versatile",
+    "meta-llama/llama-prompt-guard-2-22m",
     "llama-3.1-8b-instant",
 ]
 PAGE_TITLE = "LangGraph: Build stateful Agentic AI"
