@@ -24,7 +24,6 @@ LLM_OPTIONS = ["Groq"]
 USECASE_OPTIONS = ["Basic Chatbot", "Chatbot with WebSearch", "AI News"]
 GROQ_MODEL_OPTIONS = [
     "llama-3.3-70b-versatile",
-    "meta-llama/llama-4-scout-17b-16e-instruct",
     "llama-3.1-8b-instant",
 ]
 PAGE_TITLE = "LangGraph: Build stateful Agentic AI"
