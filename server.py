@@ -24,7 +24,7 @@ LLM_OPTIONS = ["Groq"]
 USECASE_OPTIONS = ["Basic Chatbot", "Chatbot with WebSearch", "AI News"]
 GROQ_MODEL_OPTIONS = [
     "groq/compound",
-    "meta-llama/llama-prompt-guard-2-22m",
+    "meta-llama/llama-4-scout-17b-16e-instruct",
     "qwen/qwen3.6-27b"
 ]
 PAGE_TITLE = "LangGraph: Build stateful Agentic AI"
